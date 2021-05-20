@@ -1,0 +1,35 @@
+* Language
+
+Here is a notebook style development in emacs.
+
+** Lesson-1
+
+Python version
+
+#+BEGIN_SRC python :tangle bin/script.py
+  passwordFile = open('SecretPasswordFile.txt')
+  secretPassword = passwordFile.read().rstrip()
+  print ('Enter your password')
+  typedPassword = input()
+  if typedPassword ==  secretPassword:
+      print ('Access granted')
+      if typedPassword == '12345':
+          print('That password is one that an idiot puts on their luggage')
+  else:
+      print('Access denied')
+#+END_SRC
+
+Here is  clojure (target:Babashka) version.
+
+#+BEGIN_SRC clojure :tangle bin/script.bb
+  (let [secretPassword (clojure.string/trimr (slurp "SecretPasswordFile.txt"))
+        _              (println "Enter your password")
+        typedPassword  (read-line)]
+    (if (= typedPassword secretPassword)
+      (do
+        (print "Access granted")
+        (when (= typedPassword "12345")
+          (print "That password is one that an idiot puts on their luggage")))
+      (print "Access denied")))
+#+END_SRC
+* Automate
